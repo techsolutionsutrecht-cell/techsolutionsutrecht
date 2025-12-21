@@ -1,0 +1,121 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String              @id @default(cuid())
+  title       String
+  slug        String              @unique
+  description String
+  image       String?
+  category    ProjectCategory
+  status      Status              @default(DRAFT)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  tags        String[]
+  screenshots ProjectScreenshot[]
+}
+
+model ProjectScreenshot {
+  id        String   @id @default(cuid())
+  url       String
+  projectId String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model BlogPost {
+  id               String        @id @default(cuid())
+  title            String
+  slug             String        @unique
+  content          String?
+  image            String?
+  category         BlogCategory
+  status           Status        @default(DRAFT)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  author           String        @default("Team Tech Solutions")
+  ctaButtonText    String        @default("Neem Contact Op")
+  ctaTitle         String        @default("Need help?")
+  featuredImageAlt String?
+  introduction     String?
+  metaDescription  String?
+  metaName         String?
+  metaTitle        String?
+  publishDate      DateTime      @default(now())
+  faqs             BlogFAQ[]
+  sections         BlogSection[]
+}
+
+model BlogSection {
+  id         String   @id @default(cuid())
+  title      String
+  content    String
+  image      String?
+  imageAlt   String?
+  order      Int      @default(0)
+  blogPostId String
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+}
+
+model BlogFAQ {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String
+  order      Int      @default(0)
+  blogPostId String
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  service   String
+  details   String
+  name      String
+  email     String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+}
+
+enum ProjectCategory {
+  WEB_DESIGN
+  SOFTWARE_DEV
+  APP_DEV
+  HARDWARE_REPAIR
+}
+
+enum BlogCategory {
+  WEB_DESIGN
+  SOFTWARE_DEV
+  APP_DEV
+  HARDWARE_REPAIR
+}
