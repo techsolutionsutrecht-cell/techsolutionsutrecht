@@ -1,0 +1,42 @@
+name: Remote Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd ${{ secrets.PROJECT_PATH }}
+            git pull origin main
+            
+            # Create .env file for production if it doesn't exist or update it
+            cat <<EOF > .env
+            DATABASE_URL="${{ secrets.DATABASE_URL }}"
+            NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}"
+            NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}"
+            RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}"
+            POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+            POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            EOF
+
+            # Deploy with Docker Compose
+            docker compose -f docker-compose.production.yml up --build -d
+            
+            # Run Prisma migrations
+            docker exec tech_solutions_app npx prisma migrate deploy
