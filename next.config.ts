@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: false,
   images: {
     remotePatterns: [
@@ -15,11 +14,10 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  serverActions: {
-    bodySizeLimit: '20mb',
-  },
   experimental: {
-    // سایر تنظیمات experimental
+    serverActions: {
+      bodySizeLimit: '20mb',
+    } as any,
   },
 };
 
