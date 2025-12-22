@@ -36,8 +36,9 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 
-# ایجاد پوشه آپلود و تنظیم دسترسی‌ها
-RUN mkdir -p public/uploads && chown -R nextjs:nodejs /app/public
+# ایجاد پوشه‌های مورد نیاز و تنظیم دسترسی‌ها
+RUN mkdir -p public/uploads .next/cache/images && \
+    chown -R nextjs:nodejs /app/public /app/.next
 
 USER nextjs
 
