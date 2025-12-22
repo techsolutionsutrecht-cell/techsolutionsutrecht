@@ -51,4 +51,9 @@ export const baseMetadata: Metadata = {
     follow: true,
   },
   manifest: '/manifest.webmanifest',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 };
