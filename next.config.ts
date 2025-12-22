@@ -15,10 +15,11 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  serverActions: {
+    bodySizeLimit: '20mb',
+  },
   experimental: {
-    serverActions: {
-      bodySizeLimit: '20mb',
-    },
+    // سایر تنظیمات experimental
   },
 };
 
