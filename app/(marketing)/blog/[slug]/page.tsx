@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { generateFAQSchema, generateTableOfContents } from "@/lib/blog-utils";
 import TableOfContents from "@/components/blog/TableOfContents";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
 import { BlogPost, BlogSection, BlogFAQ } from "@prisma/client";
 
@@ -96,11 +97,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="col-span-12 lg:col-span-8 lg:col-start-5 space-y-24">
                     {/* Featured Image */}
                     {post.image && (
-                        <div className="border-4 border-swiss-noir shadow-[12px_12px_0px_0px_rgba(0,0,1,0.1)] overflow-hidden aspect-video">
-                            <img
+                        <div className="border-4 border-swiss-noir shadow-[12px_12px_0px_0px_rgba(0,0,1,0.1)] overflow-hidden aspect-video relative">
+                            <Image
                                 src={post.image}
                                 alt={post.featuredImageAlt || post.title}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                             />
                         </div>
                     )}
@@ -125,11 +128,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                             <div className="grid grid-cols-1 gap-12">
                                 {section.image && (
-                                    <div className="border-2 border-swiss-noir shadow-lg overflow-hidden max-h-[500px]">
-                                        <img
+                                    <div className="border-2 border-swiss-noir shadow-lg overflow-hidden max-h-[500px] relative aspect-video">
+                                        <Image
                                             src={section.image}
                                             alt={section.imageAlt || section.title}
-                                            className="w-full h-full object-cover"
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                                         />
                                     </div>
                                 )}

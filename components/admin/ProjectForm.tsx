@@ -22,6 +22,13 @@ export default function ProjectForm({ initialData }: ProjectFormProps) {
     const handleFeaturedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
+            
+            // Check file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Featured image is too large (max 10MB). Please compress it first.');
+                return;
+            }
+            
             setFeaturedFile(file);
             setFeaturedPreview(URL.createObjectURL(file));
         }
@@ -30,6 +37,14 @@ export default function ProjectForm({ initialData }: ProjectFormProps) {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const selectedFiles = Array.from(e.target.files);
+            
+            // Check individual file sizes (max 10MB per file)
+            const oversizedFiles = selectedFiles.filter(file => file.size > 10 * 1024 * 1024);
+            if (oversizedFiles.length > 0) {
+                alert(`Some files are too large (max 10MB per file). Please compress them first.`);
+                return;
+            }
+            
             setFiles(prev => [...prev, ...selectedFiles]);
 
             const newPreviews = selectedFiles.map(file => URL.createObjectURL(file));
@@ -48,6 +63,16 @@ export default function ProjectForm({ initialData }: ProjectFormProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Validate total file size (max 45MB to stay under 50MB limit with overhead)
+        const totalSize = files.reduce((sum, file) => sum + file.size, 0) + (featuredFile?.size || 0);
+        const maxSize = 45 * 1024 * 1024; // 45MB in bytes
+        
+        if (totalSize > maxSize) {
+            alert(`Total file size (${(totalSize / 1024 / 1024).toFixed(1)}MB) exceeds the limit of 45MB. Please reduce image sizes or count.`);
+            return;
+        }
+
         setLoading(true);
 
         const formData = new FormData(e.currentTarget);

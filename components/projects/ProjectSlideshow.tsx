@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 interface ProjectSlideshowProps {
     images: string[];
@@ -32,10 +33,12 @@ export default function ProjectSlideshow({ images, title }: ProjectSlideshowProp
 
     if (images.length === 1) {
         return (
-            <img
+            <Image
                 src={images[0]}
                 alt={title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
         );
     }
@@ -43,16 +46,22 @@ export default function ProjectSlideshow({ images, title }: ProjectSlideshowProp
     return (
         <div className="relative w-full h-full group">
             <AnimatePresence mode="wait">
-                <motion.img
+                <motion.div
                     key={currentIndex}
-                    src={images[currentIndex]}
-                    alt={`${title} - slide ${currentIndex + 1}`}
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
+                    className="absolute inset-0 w-full h-full"
+                >
+                    <Image
+                        src={images[currentIndex]}
+                        alt={`${title} - slide ${currentIndex + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                </motion.div>
             </AnimatePresence>
 
             {/* Navigation Arrows */}

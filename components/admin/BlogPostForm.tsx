@@ -69,6 +69,13 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
     const handleFeaturedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
+            
+            // Check file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Featured image is too large (max 10MB). Please compress it first.');
+                return;
+            }
+            
             setFeaturedFile(file);
             setFeaturedPreview(URL.createObjectURL(file));
         }
@@ -91,6 +98,13 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
     const handleSectionImageChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
+            
+            // Check file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Section image is too large (max 10MB). Please compress it first.');
+                return;
+            }
+            
             updateSection(index, {
                 localFile: file,
                 localPreview: URL.createObjectURL(file)
@@ -114,6 +128,18 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Validate total file size (max 45MB to stay under 50MB limit with overhead)
+        const sectionFiles = sections.filter(s => s.localFile).map(s => s.localFile!);
+        const allFiles = [featuredFile, ...sectionFiles].filter(Boolean) as File[];
+        const totalSize = allFiles.reduce((sum, file) => sum + file.size, 0);
+        const maxSize = 45 * 1024 * 1024; // 45MB in bytes
+        
+        if (totalSize > maxSize) {
+            alert(`Total file size (${(totalSize / 1024 / 1024).toFixed(1)}MB) exceeds the limit of 45MB. Please reduce image sizes or count.`);
+            return;
+        }
+
         setLoading(true);
 
         const formData = new FormData(e.currentTarget);

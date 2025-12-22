@@ -55,7 +55,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 </div>
 
                 <Link
-                    href={`/projects/${project.id}`}
+                    href={`/projects/${project.slug}`}
                     className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-sm group/link"
                 >
                     <span className="border-b-4 border-swiss-noir group-hover/link:border-utrecht-blue transition-colors">

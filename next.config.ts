@@ -11,12 +11,20 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.techsolutionsutrecht.nl',
+      },
+      {
+        protocol: 'https',
+        hostname: 'techsolutionsutrecht.nl',
       }
     ],
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: '20mb',
+      bodySizeLimit: '50mb',
     } as any,
   },
 };
