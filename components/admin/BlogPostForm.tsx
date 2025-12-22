@@ -142,8 +142,8 @@ export default function BlogPostForm({ initialData }: BlogPostFormProps) {
                 return {
                     title: sec.title || "",
                     content: sec.content || "",
-                    image: imageUrl || null,
-                    imageAlt: sec.imageAlt || null,
+                    image: imageUrl || undefined,
+                    imageAlt: sec.imageAlt || undefined,
                     order: sec.order || 0
                 };
             }));
