@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
     return {
         title: post.metaTitle || post.title,
-        description: post.metaDescription || post.introduction,
+        description: post.metaDescription || post.introduction || undefined,
         openGraph: {
             title: post.metaTitle || post.title,
-            description: post.metaDescription || post.introduction,
+            description: post.metaDescription || post.introduction || undefined,
             images: post.image ? [post.image] : [],
             type: "article",
             publishedTime: post.publishDate.toISOString(),
