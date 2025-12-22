@@ -7,6 +7,8 @@ import Link from "next/link";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
 import { BlogPost, BlogSection, BlogFAQ } from "@prisma/client";
 
+export const dynamic = 'force-dynamic';
+
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>;
 }

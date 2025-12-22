@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ProjectCard from "@/components/projects/ProjectCard";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProjectsPage() {
     const projects = await prisma.project.findMany({
         where: { status: "PUBLISHED" },
