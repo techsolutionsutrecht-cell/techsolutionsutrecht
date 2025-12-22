@@ -1,101 +1,36 @@
-# Tech Solutions Utrecht
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A modern Next.js website for Tech Solutions Utrecht - offering IT services including repairs, software development, and web design.
+## Getting Started
 
-## 🚀 Quick Start
-
-### Development
+First, run the development server:
 
 ```bash
-# Install dependencies
-npm install
-
-# Run development server
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### With Docker (Local)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-# Start PostgreSQL database
-docker compose up -d
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-# Run Prisma migrations
-npx prisma migrate dev
+## Learn More
 
-# Run development server
-npm run dev
-```
+To learn more about Next.js, take a look at the following resources:
 
-## 📦 Tech Stack
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS 4
-- **Database**: PostgreSQL with Prisma ORM
-- **Animations**: Framer Motion
-- **Email**: Nodemailer
-- **Deployment**: Docker + Nginx on Hetzner
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 🌐 Production Deployment
+## Deploy on Vercel
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Quick Deploy to Hetzner Server
-
-```bash
-# On your server
-git clone <your-repo-url> /var/www/techsolutionsutrecht.nl
-cd /var/www/techsolutionsutrecht.nl
-bash scripts/setup-server.sh
-bash scripts/deploy.sh
-```
-
-## 📂 Project Structure
-
-```
-├── app/                      # Next.js App Router
-│   ├── (admin)/             # Admin panel routes
-│   └── (marketing)/         # Public-facing pages
-├── components/              # React components
-├── lib/                     # Utilities and helpers
-├── prisma/                  # Database schema and migrations
-├── scripts/                 # Deployment and utility scripts
-└── public/                  # Static assets
-```
-
-## 🛠️ Environment Variables
-
-Create `.env` file for development:
-
-```env
-DATABASE_URL="postgresql://admin:password@localhost:5432/tech_hub"
-POSTGRES_USER=admin
-POSTGRES_PASSWORD=password
-POSTGRES_DB=tech_hub
-NEXTAUTH_SECRET=your_secret_here
-NEXTAUTH_URL=http://localhost:3000
-RESEND_API_KEY=your_resend_key
-```
-
-For production, see `.env.production.example`.
-
-## 📝 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
-
-## 🔒 Admin Panel
-
-Access the admin panel at `/admin/dashboard` after deployment.
-
-## 📄 License
-
-Private project for Tech Solutions Utrecht.
-
----
-
-**Live Site**: https://techsolutionsutrecht.nl
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

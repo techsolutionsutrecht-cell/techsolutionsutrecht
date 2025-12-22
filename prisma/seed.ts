@@ -46,7 +46,7 @@ async function main() {
             {
                 title: "Waarom Next.js de beste keuze is voor Utrechtse startups",
                 slug: "waarom-nextjs-beste-keuze",
-                introduction: "Snelheid, SEO en schaalbaarheid: ontdek waarom moderne tech-bedrijven massaal overstappen naar Next.js.",
+                excerpt: "Snelheid, SEO en schaalbaarheid: ontdek waarom moderne tech-bedrijven massaal overstappen naar Next.js.",
                 content: "Next.js biedt fantastische mogelijkheden voor performance en SEO...",
                 category: BlogCategory.SOFTWARE_DEV,
                 status: Status.PUBLISHED,
@@ -54,7 +54,7 @@ async function main() {
             {
                 title: "De Staat van Tech in Midden-Nederland",
                 slug: "staat-van-tech-midden-nederland",
-                introduction: "Utrecht groeit uit tot de belangrijkste tech-hub van Europa. Wat betekent dit voor uw bedrijf?",
+                excerpt: "Utrecht groeit uit tot de belangrijkste tech-hub van Europa. Wat betekent dit voor uw bedrijf?",
                 content: "De regio Utrecht heeft een uniek ecosysteem van talent en kapitaal...",
                 category: BlogCategory.APP_DEV,
                 status: Status.PUBLISHED,

@@ -2,8 +2,6 @@ import { prisma } from "@/lib/prisma";
 import StatsGrid from "@/components/admin/StatsGrid";
 import { BlogPost, ContactMessage } from "@prisma/client";
 
-export const dynamic = 'force-dynamic';
-
 export default async function AdminDashboard() {
     const [projectCount, blogCount, unreadMessages, recentAanvragen, recentBlogs] = await Promise.all([
         prisma.project.count(),

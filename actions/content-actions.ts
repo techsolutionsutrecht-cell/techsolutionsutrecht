@@ -206,11 +206,12 @@ export async function createContactMessage(data: {
 }
 
 export async function markContactAsRead(id: string) {
-    await prisma.contactMessage.update({
+    const message = await prisma.contactMessage.update({
         where: { id },
         data: { isRead: true },
     });
     revalidatePath("/admin/contacts");
+    return message;
 }
 
 export async function deleteContactMessage(id: string) {
