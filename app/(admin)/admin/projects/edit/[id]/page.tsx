@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import ProjectForm from "@/components/admin/ProjectForm";
 import { notFound } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 interface EditProjectPageProps {
     params: {
         id: string;
