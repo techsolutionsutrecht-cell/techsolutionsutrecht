@@ -8,10 +8,10 @@ services:
     ports:
       - "3007:3000"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - RESEND_API_KEY=${RESEND_API_KEY}
+      - DATABASE_URL
+      - NEXTAUTH_SECRET
+      - NEXTAUTH_URL
+      - RESEND_API_KEY
     volumes:
       - uploads_data:/app/public/uploads
     depends_on:
@@ -30,5 +30,4 @@ services:
 
 volumes:
   postgres_data:
-    external: true
   uploads_data:
