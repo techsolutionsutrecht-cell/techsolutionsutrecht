@@ -43,7 +43,8 @@ export default async function AdminContacts() {
                                     </p>
                                     <div className="flex gap-4 justify-end" suppressHydrationWarning>
                                         {!msg.isRead && (
-                                            <form action={markContactAsRead.bind(null, msg.id)}>
+                                            /* اصلاح شده: استفاده از یک تابع async برای فراخوانی اکشن */
+                                            <form action={async () => { "use server"; await markContactAsRead(msg.id); }}>
                                                 <button type="submit" className="text-swiss-noir/40 hover:text-green-500 transition-colors">
                                                     <Check size={16} />
                                                 </button>
@@ -52,7 +53,8 @@ export default async function AdminContacts() {
                                         <a href={`mailto:${msg.email}`} className="text-swiss-noir/40 hover:text-utrecht-blue transition-colors">
                                             <Mail size={16} />
                                         </a>
-                                        <form action={deleteContactMessage.bind(null, msg.id)}>
+                                        {/* اصلاح شده: استفاده از یک تابع async برای فراخوانی اکشن حذف */}
+                                        <form action={async () => { "use server"; await deleteContactMessage(msg.id); }}>
                                             <button type="submit" className="text-swiss-noir/40 hover:text-red-500 transition-colors">
                                                 <Trash2 size={16} />
                                             </button>

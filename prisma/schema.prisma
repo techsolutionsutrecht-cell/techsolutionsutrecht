@@ -1,11 +1,17 @@
 generator client {
-  provider   = "prisma-client-js"
-  engineType = "library"
+  provider      = "prisma-client-js"
+  engineType    = "library"
+  // اضافه کردن خط زیر برای شناسایی صحیح سیستم‌عامل داکر
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "postgresql"
+  // اضافه کردن خط زیر برای اتصال به دیتابیس از طریق متغیر محیطی
+  url      = env("DATABASE_URL")
 }
+
+// ... بقیه مدل‌ها (User, Project, و غیره) بدون تغییر بمانند
 
 model User {
   id        String   @id @default(cuid())
