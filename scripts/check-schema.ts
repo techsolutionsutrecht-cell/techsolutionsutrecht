@@ -7,25 +7,26 @@ import path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 const connectionString = `${process.env.DATABASE_URL}`;
-console.log('Using connection string (domain only):', connectionString ? connectionString.split('@')[1] : 'undefined');
-
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({
-    adapter,
-    log: ['query', 'error']
-});
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
     try {
+        console.log('Checking models...');
         const projectCount = await prisma.project.count()
         console.log('Project count:', projectCount)
-        console.log('Database connection successful!')
+
+        const blogCount = await prisma.blogPost.count()
+        console.log('Blog count:', blogCount)
+
+        const messageCount = await prisma.contactMessage.count()
+        console.log('Message count:', messageCount)
+
+        console.log('Database schema check successful!')
     } catch (e: any) {
-        console.error('Database connection failed!')
-        console.error('Error Code:', e.code)
-        console.error('Error Message:', e.message)
-        if (e.meta) console.error('Error Meta:', e.meta)
+        console.error('Database check failed!')
+        console.error('Error:', e.message)
     } finally {
         await prisma.$disconnect()
         await pool.end();

@@ -7,6 +7,8 @@ import Link from "next/link";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
 import { BlogPost, BlogSection, BlogFAQ } from "@prisma/client";
 
+export const dynamic = 'force-dynamic';
+
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>;
 }
@@ -21,10 +23,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
     return {
         title: post.metaTitle || post.title,
-        description: post.metaDescription || post.introduction,
+        description: post.metaDescription || post.introduction || undefined,
         openGraph: {
             title: post.metaTitle || post.title,
-            description: post.metaDescription || post.introduction,
+            description: post.metaDescription || post.introduction || undefined,
             images: post.image ? [post.image] : [],
             type: "article",
             publishedTime: post.publishDate.toISOString(),

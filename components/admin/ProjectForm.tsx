@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProjectCategory, Status, Project, ProjectScreenshot } from "@prisma/client";
-import { createProject, updateProject, uploadProjectFiles } from "@/actions/content-actions";
+import { createProject, updateProject } from "@/actions/content-actions";
 import { useRouter } from "next/navigation";
 
 interface ProjectFormProps {
@@ -65,13 +65,23 @@ export default function ProjectForm({ initialData }: ProjectFormProps) {
             if (featuredFile) {
                 const featuredFormData = new FormData();
                 featuredFormData.append("files", featuredFile);
-                const results = await uploadProjectFiles(featuredFormData);
-                featuredImageUrl = results[0];
+                featuredFormData.append("folder", "projects");
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: featuredFormData,
+                });
+                const { urls } = await response.json();
+                featuredImageUrl = urls[0];
             }
 
             const uploadFormData = new FormData();
             files.forEach(file => uploadFormData.append("files", file));
-            const newScreenshotUrls = await uploadProjectFiles(uploadFormData);
+            uploadFormData.append("folder", "projects");
+            const screenshotsResponse = await fetch('/api/upload', {
+                method: 'POST',
+                body: uploadFormData,
+            });
+            const { urls: newScreenshotUrls } = await screenshotsResponse.json();
             const allScreenshotUrls = [...existingScreenshots, ...newScreenshotUrls];
 
             // 2. Create or Update project

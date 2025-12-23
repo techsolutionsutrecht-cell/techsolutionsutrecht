@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh -o StrictHostKeyChecking=no root@91.99.49.208 \"docker --version && docker compose version\")",
+      "Bash(ssh:*)",
+      "Bash(ssh-keygen:*)",
+      "Bash(sshpass -p \"102067438Gerd.com\" ssh -o StrictHostKeyChecking=no root@91.99.49.208 \"whoami && docker --version\")",
+      "Bash(powershell -Command \"\n$password = ConvertTo-SecureString ''102067438Gerd.com'' -AsPlainText -Force\n$cred = New-Object System.Management.Automation.PSCredential \\(''root'', $password\\)\nssh root@91.99.49.208 ''whoami && docker --version''\n\")"
+    ]
+  }
+}

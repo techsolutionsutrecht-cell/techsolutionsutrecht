@@ -3,6 +3,8 @@ import { Mail, Check, Trash2, User } from "lucide-react";
 import { markContactAsRead, deleteContactMessage } from "@/actions/content-actions";
 import { ContactMessage } from "@prisma/client";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminContacts() {
     const messages = await prisma.contactMessage.findMany({
         orderBy: { createdAt: "desc" }
