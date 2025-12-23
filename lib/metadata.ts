@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'TechSolutionsUtrecht',
   description: 'Expert web design, software ontwikkeling en hardware reparaties in Utrecht. Wij bouwen de digitale toekomst van Midden-Nederland.',
   url: 'https://techsolutionsutrecht.nl',
-  ogImage: '/og-image.jpg',
+  ogImage: '/open-graph.png',
   address: {
     area: 'Utrecht & Omgeving',
     city: 'Utrecht',
@@ -39,11 +39,20 @@ export const baseMetadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   metadataBase: new URL(siteConfig.url),
   robots: {
