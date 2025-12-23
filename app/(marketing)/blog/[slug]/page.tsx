@@ -8,10 +8,27 @@ import Image from "next/image";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
 import { BlogPost, BlogSection, BlogFAQ } from "@prisma/client";
 
-export const dynamic = 'force-dynamic';
+// ISR: Revalidate every hour
+export const revalidate = 3600;
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>;
+}
+
+// Pre-generate all published blog posts at build time
+export async function generateStaticParams() {
+    const posts = await prisma.blogPost.findMany({
+        where: {
+            status: 'PUBLISHED',
+        },
+        select: {
+            slug: true,
+        },
+    });
+
+    return posts.map((post) => ({
+        slug: post.slug,
+    }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {

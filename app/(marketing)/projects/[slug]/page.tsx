@@ -6,11 +6,28 @@ import Link from "next/link";
 import Image from "next/image";
 import ProjectSlideshow from "@/components/projects/ProjectSlideshow";
 
-export const dynamic = 'force-dynamic';
+// ISR: Revalidate every hour
+export const revalidate = 3600;
 
 type Props = {
     params: Promise<{ slug: string }>;
 };
+
+// Pre-generate all published projects at build time
+export async function generateStaticParams() {
+    const projects = await prisma.project.findMany({
+        where: {
+            status: 'PUBLISHED',
+        },
+        select: {
+            slug: true,
+        },
+    });
+
+    return projects.map((project) => ({
+        slug: project.slug,
+    }));
+}
 
 async function getProject(slug: string) {
     const project = await prisma.project.findUnique({
