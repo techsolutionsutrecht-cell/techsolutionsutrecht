@@ -61,8 +61,8 @@ export const baseMetadata: Metadata = {
   },
   manifest: '/manifest.webmanifest',
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
+    icon: '/logo-tsu.png',
+    shortcut: '/logo-tsu.png',
+    apple: '/logo-tsu.png',
   },
 };
