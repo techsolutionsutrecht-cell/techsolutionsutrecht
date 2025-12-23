@@ -21,11 +21,17 @@ const nextConfig: NextConfig = {
         hostname: 'techsolutionsutrecht.nl',
       }
     ],
+    formats: ['image/avif', 'image/webp'], // Modern image formats
   },
   experimental: {
     serverActions: {
       bodySizeLimit: '50mb',
     } as any,
+    optimizePackageImports: ['lucide-react'], // Tree-shake icons
+  },
+  // Production optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 };
 

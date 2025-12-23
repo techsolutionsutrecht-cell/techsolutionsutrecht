@@ -6,6 +6,8 @@ import { baseMetadata } from "@/lib/metadata";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap', // Prevents render blocking
+  preload: true,
 });
 
 export const metadata: Metadata = baseMetadata;
