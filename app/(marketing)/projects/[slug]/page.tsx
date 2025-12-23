@@ -8,26 +8,12 @@ import ProjectSlideshow from "@/components/projects/ProjectSlideshow";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600;
+// Allow dynamic params (pages generated on first visit)
+export const dynamicParams = true;
 
 type Props = {
     params: Promise<{ slug: string }>;
 };
-
-// Pre-generate all published projects at build time
-export async function generateStaticParams() {
-    const projects = await prisma.project.findMany({
-        where: {
-            status: 'PUBLISHED',
-        },
-        select: {
-            slug: true,
-        },
-    });
-
-    return projects.map((project) => ({
-        slug: project.slug,
-    }));
-}
 
 async function getProject(slug: string) {
     const project = await prisma.project.findUnique({
