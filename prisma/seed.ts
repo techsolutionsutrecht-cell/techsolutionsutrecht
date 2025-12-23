@@ -50,6 +50,8 @@ async function main() {
                 content: "Next.js biedt fantastische mogelijkheden voor performance en SEO...",
                 category: BlogCategory.SOFTWARE_DEV,
                 status: Status.PUBLISHED,
+                author: "Tech Solutions Utrecht",
+                publishDate: new Date(),
             },
             {
                 title: "De Staat van Tech in Midden-Nederland",
@@ -57,6 +59,8 @@ async function main() {
                 introduction: "Utrecht groeit uit tot de belangrijkste tech-hub van Europa. Wat betekent dit voor uw bedrijf?",
                 content: "De regio Utrecht heeft een uniek ecosysteem van talent en kapitaal...",
                 category: BlogCategory.APP_DEV,
+                author: "Tech Solutions Utrecht",
+                publishDate: new Date(),
                 status: Status.PUBLISHED,
             },
         ],

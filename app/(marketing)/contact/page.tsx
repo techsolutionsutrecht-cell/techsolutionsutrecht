@@ -48,7 +48,7 @@ export default function ContactPage() {
 
     const isStepComplete = () => {
         if (currentStep === 0) return formData.service !== "";
-        if (currentStep === 1) return formData.details.length > 5;
+        if (currentStep === 1) return formData.details.trim().length >= 5;
         return formData.name && formData.email;
     };
 
